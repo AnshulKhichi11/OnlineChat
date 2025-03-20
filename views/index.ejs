@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whattsapp Chats</title>
+</head>
+<body>
+    <h1>Whattsapp Chats..</h1>
+    <form action="/chats/new" method="get">
+        <button>New Chats</button> <br>
+    </form>
+    <div class="box" style="color: aqua; height: 100px;">
+        <% for(chat of chats){ %>
+            <div style="background-color: azure; color: black;border: 2px solid black; border-radius: 4px; padding:4px ; margin-top: 4px;">
+                <h2>Chat id : <%= chat.id %></h2>
+                <h3>From : <%= chat.from %></h3>
+                <p style="background-color: rgb(38, 135, 231);display: flex; justify-content: space-between;">
+                    Message : <%= chat.msg %> <form method="get" action="/chats/<%= chat.id %>/edit"><button style="border-radius: 30px;">Edit</button></form></p>
+                <h3>Recived : <%= chat.to %></h3>
+                <hr>
+                <p>Seen : <%=chat.Created_at.toString().split(" ")[4] %></p>
+                <p>Seen : <%=chat.Created_at.toString().split(" ").slice(0,4).join(" ") %></p>
+                <hr>
+                <form action="/chats/<%=chat.id%>?_method=DELETE" method="post">
+                    <button>Delete</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
+
